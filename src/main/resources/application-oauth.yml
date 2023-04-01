@@ -1,0 +1,24 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id:
+            client-secret:
+            scope:
+              - email
+              - profile
+          naver:
+            client-id:
+            client-secret:
+            redirect-uri:
+            authorizationGrantType:
+            scope:
+              - name
+              - email
+              - profile_image
+          kakao:
+            client-id:
+            client-secret:
+
