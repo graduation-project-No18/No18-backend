@@ -1,5 +1,6 @@
-package graduation.project.no18.member;
+package graduation.project.no18.domain.member;
 
+import graduation.project.no18.domain.BaseEntity;
 import graduation.project.no18.enums.ProviderType;
 import graduation.project.no18.enums.RoleType;
 import jakarta.persistence.Column;
@@ -20,7 +21,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
-public class Member {
+public class Member extends BaseEntity {
     @Id @Column(name = "member_id")
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")

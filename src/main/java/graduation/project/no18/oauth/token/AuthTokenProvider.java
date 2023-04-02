@@ -1,6 +1,5 @@
 package graduation.project.no18.oauth.token;
 
-import graduation.project.no18.member.Member;
 import graduation.project.no18.oauth.exception.TokenValidFailedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
