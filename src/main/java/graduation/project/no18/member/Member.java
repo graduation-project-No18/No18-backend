@@ -33,12 +33,5 @@ public class Member {
     private ProviderType providerType;
     private RoleType roleType;
 
-    
-
-
-
-
-
-
 
 }
