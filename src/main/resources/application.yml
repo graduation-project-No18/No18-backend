@@ -1,4 +1,6 @@
 spring:
   profiles:
-    include: connection, oauth, app
+    include: connection, oauth
+
+
 

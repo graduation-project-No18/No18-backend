@@ -1,4 +1,4 @@
-package graduation.project.no18.oauth;
+package graduation.project.no18.oauth.token;
 
 import io.jsonwebtoken.*;
 import lombok.Getter;
