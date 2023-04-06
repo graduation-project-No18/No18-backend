@@ -38,6 +38,7 @@ no18의 Backend Repository 입니다.
 
 ### 작업 진행 상황
 
--  
+- 20230407 - OAuth2 관련 작업중.. 
+- 
 
 
