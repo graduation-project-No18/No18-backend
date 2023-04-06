@@ -28,27 +28,46 @@ public class Member extends BaseEntity {
     private UUID id;
     private String email;
     private String password;
+    private String nickname;
     private String profileImg;
     private String introduction;
     private ProviderType providerType;
     private RoleType roleType;
 
-    public Member(String email, String password, String profileImg, String introduction,
-                  ProviderType providerType, RoleType roleType){
+    @Builder
+    public Member(String email, String password, String profileImg, String nickname,
+                  String introduction, ProviderType providerType, RoleType roleType){
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
         this.profileImg = profileImg;
         this.introduction = introduction;
         setProviderType(providerType);
         setRoleType(roleType);
     }
 
+    public String getNickname(){
+        return nickname;
+    }
+    public String getEmail(){
+        return email;
+    }
+    public ProviderType getProviderType(){
+        return providerType;
+    }
+    public RoleType getRoleType(){
+        return roleType;
+    }
     public void changePassword(String password){
         this.password = password;
     }
 
     public void changeIntroduction(String introduction){
         this.introduction = introduction;
+    }
+
+    public void changeNickname(String nickname){
+        this.nickname = nickname;
     }
 
     private void setProviderType(ProviderType providerType){
@@ -60,7 +79,10 @@ public class Member extends BaseEntity {
     }
 
     public boolean checkPassword(String password){
-       return this.password == password ? true : false;
+       return this.password == password;
     }
 
+    public boolean checkProviderType(ProviderType providerType) {
+        return this.providerType == providerType;
+    }
 }

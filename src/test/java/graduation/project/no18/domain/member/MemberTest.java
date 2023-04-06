@@ -17,13 +17,14 @@ public class MemberTest {
         //given
         String email = "test@test.com";
         String password = "1234";
+        String nickname = "test";
         String profileImg = null;
         String introduction = "test";
         ProviderType providerType = ProviderType.LOCAL;
         RoleType roleType = RoleType.MEMBER;
 
         //when
-        Member member = new Member(email, password, profileImg, introduction, providerType, roleType);
+        Member member = new Member(email, password, profileImg, nickname, introduction, providerType, roleType);
 
         //then
         assertThat(member.checkPassword("1234")).isEqualTo(true);
