@@ -1,4 +1,4 @@
-package graduation.project.no18.domain;
+package graduation.project.no18.domain.Base;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
