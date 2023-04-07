@@ -15,9 +15,9 @@ public class CustomMemberDetailService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Member member = memberRepository.findMemberByEmail(email).orElseGet(() -> {
-            throw new IllegalArgumentException("Can't find the email");
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+        Member member = memberRepository.findMemberByAccountId(id).orElseGet(() -> {
+            throw new IllegalArgumentException("Can't find the id");
         });
         return MemberPrincipal.create(member);
     }

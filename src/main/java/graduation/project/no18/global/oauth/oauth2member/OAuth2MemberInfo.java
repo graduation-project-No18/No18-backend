@@ -13,6 +13,8 @@ public abstract class OAuth2MemberInfo {
         return attributes;
     }
 
+    public abstract String getId();
+
     public abstract String getEmail();
 
     public abstract String getNickname();

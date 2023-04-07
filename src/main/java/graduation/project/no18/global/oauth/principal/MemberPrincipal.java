@@ -1,8 +1,8 @@
 package graduation.project.no18.global.oauth.principal;
 
 import graduation.project.no18.domain.member.Member;
-import graduation.project.no18.global.oauth.enums.ProviderType;
-import graduation.project.no18.global.oauth.enums.RoleType;
+import graduation.project.no18.global.oauth.type.ProviderType;
+import graduation.project.no18.global.oauth.type.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +22,10 @@ import java.util.Map;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class MemberPrincipal implements OAuth2User, UserDetails, OidcUser {
+
+    private final String memberAccountId;
     private final String email;
-//    private final String password;
+    private final String password;
     private final ProviderType providerType;
     private final RoleType roleType;
     private final Collection<GrantedAuthority> authorities;
@@ -40,17 +42,12 @@ public class MemberPrincipal implements OAuth2User, UserDetails, OidcUser {
 
     @Override
     public String getUsername() {
-        return null;
+        return memberAccountId;
     }
 
     @Override
     public String getName() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
+        return memberAccountId;
     }
 
     @Override
@@ -92,7 +89,9 @@ public class MemberPrincipal implements OAuth2User, UserDetails, OidcUser {
     }
     public static MemberPrincipal create(Member member){
         return new MemberPrincipal(
+                member.getAccountId(),
                 member.getEmail(),
+                member.getPassword(),
                 member.getProviderType(),
                 member.getRoleType(),
                 Collections.singletonList(new SimpleGrantedAuthority(RoleType.MEMBER.getCode()))

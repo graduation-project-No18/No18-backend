@@ -6,6 +6,12 @@ public class KakaoOAuth2MemberInfo extends OAuth2MemberInfo {
     public KakaoOAuth2MemberInfo(Map<String, Object> attributes) {
         super(attributes);
     }
+
+    @Override
+    public String getId() {
+        return attributes.get("id").toString();
+    }
+
     @Override
     public String getEmail() {
         Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");

@@ -2,11 +2,11 @@ package graduation.project.no18.global.oauth.customservice;
 
 import graduation.project.no18.domain.member.Member;
 import graduation.project.no18.domain.member.repository.MemberRepository;
-import graduation.project.no18.global.oauth.enums.ProviderType;
-import graduation.project.no18.global.oauth.enums.RoleType;
-import graduation.project.no18.global.oauth.oauth2member.OAuth2MemberFactory;
+import graduation.project.no18.global.oauth.oauth2member.OAuth2MemberInfoFactory;
 import graduation.project.no18.global.oauth.oauth2member.OAuth2MemberInfo;
 import graduation.project.no18.global.oauth.principal.MemberPrincipal;
+import graduation.project.no18.global.oauth.type.ProviderType;
+import graduation.project.no18.global.oauth.type.RoleType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -39,22 +39,22 @@ public class CustomOAuth2MemberService extends DefaultOAuth2UserService {
                 .getClientRegistration()
                         .getRegistrationId()
                         .toUpperCase());
-
         OAuth2MemberInfo memberInfo =
-                OAuth2MemberFactory.getOAuth2MemberInfo(providerType, member.getAttributes());
-
+                OAuth2MemberInfoFactory.getOAuth2MemberInfo(providerType, member.getAttributes());
+        System.out.println(providerType);
         Member savedMember =
-                memberRepository.findMemberByEmail(memberInfo.getEmail())
+                memberRepository.findMemberByAccountId(memberInfo.getId())
                         .orElse(createMember(memberInfo, providerType));
 
         if(!savedMember.checkProviderType(providerType)){
-            //throw new OAuthProviderMissMatchException();
+            throw new IllegalArgumentException("asd");
         }
         return MemberPrincipal.create(savedMember, member.getAttributes());
     }
 
     private Member createMember(OAuth2MemberInfo memberInfo, ProviderType providerType){
         Member member = Member.builder()
+                .accountId(memberInfo.getId())
                 .email(memberInfo.getEmail())
                 .nickname(memberInfo.getNickname())
                 .profileImg(memberInfo.getProfileImg())
@@ -62,7 +62,7 @@ public class CustomOAuth2MemberService extends DefaultOAuth2UserService {
                 .roleType(RoleType.MEMBER)
                 .build();
 
-        return memberRepository.saveAndFlush(member);
+        return memberRepository.save(member);
     }
 
 }

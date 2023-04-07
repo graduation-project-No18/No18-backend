@@ -2,8 +2,8 @@ package graduation.project.no18.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import graduation.project.no18.domain.Base.BaseEntity;
-import graduation.project.no18.global.oauth.enums.ProviderType;
-import graduation.project.no18.global.oauth.enums.RoleType;
+import graduation.project.no18.global.oauth.type.ProviderType;
+import graduation.project.no18.global.oauth.type.RoleType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +26,7 @@ public class Member extends BaseEntity {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-    @Column(name = "id", length = 15)
+    @Column(name = "id")
     private String accountId;
     private String email;
     @Column(length = 20)
@@ -56,6 +56,9 @@ public class Member extends BaseEntity {
     public String getNickname(){
         return nickname;
     }
+
+    public String getPassword() {return password;}
+    public String getAccountId(){return accountId;}
     public String getEmail(){
         return email;
     }

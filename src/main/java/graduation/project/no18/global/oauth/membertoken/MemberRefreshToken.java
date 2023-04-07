@@ -20,14 +20,22 @@ public class MemberRefreshToken {
     private Long memberRefreshTokenId;
 
     @NotNull
-    private UUID memberId;
+    @Column(unique = true)
+    private String memberAccountId;
 
     @Column(length = 256)
     @NotNull
     private String refreshToken;
 
-    public MemberRefreshToken(UUID memberId, String refreshToken){
-        this.memberId = memberId;
+    public MemberRefreshToken(String memberAccountId, String refreshToken){
+        this.memberAccountId = memberAccountId;
+        this.refreshToken = refreshToken;
+    }
+
+    public void updateRefreshToken(String refreshToken){
+        if(this.refreshToken.equals(refreshToken)){
+            return;
+        }
         this.refreshToken = refreshToken;
     }
 }

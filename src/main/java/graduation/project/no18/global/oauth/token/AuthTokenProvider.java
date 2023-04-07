@@ -21,8 +21,8 @@ public class AuthTokenProvider {
     private final Key key;
     private static final String AUTHORITIES_KEY = "role";
 
-    public AuthTokenProvider(String seceet){
-        this.key = Keys.hmacShaKeyFor(seceet.getBytes());
+    public AuthTokenProvider(String secret){
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 
     public AuthToken createAuthToken(String id, LocalDateTime expiry){
@@ -33,14 +33,13 @@ public class AuthTokenProvider {
         return new AuthToken(id, role, expiry, key);
     }
 
-    public AuthToken converteAuthToken(String token){
+    public AuthToken convertAuthToken(String token){
         return new AuthToken(token, key);
     }
 
     public Authentication getAuthentication(AuthToken authToken){
 
         if(authToken.validate()){
-
             Claims claims = authToken.getTokenClaims();
             Collection<? extends GrantedAuthority> authorities =
                     Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})

@@ -1,7 +1,7 @@
 package graduation.project.no18.domain.member;
 
-import graduation.project.no18.global.oauth.enums.ProviderType;
-import graduation.project.no18.global.oauth.enums.RoleType;
+import graduation.project.no18.global.oauth.type.ProviderType;
+import graduation.project.no18.global.oauth.type.RoleType;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
