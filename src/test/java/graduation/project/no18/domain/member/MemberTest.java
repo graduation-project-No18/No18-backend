@@ -1,11 +1,9 @@
 package graduation.project.no18.domain.member;
 
-import graduation.project.no18.enums.ProviderType;
-import graduation.project.no18.enums.RoleType;
-import org.assertj.core.api.Assertions;
+import graduation.project.no18.global.oauth.enums.ProviderType;
+import graduation.project.no18.global.oauth.enums.RoleType;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +13,7 @@ public class MemberTest {
     @Test
     public void createMemberTest(){
         //given
+        String accountId = "test";
         String email = "test@test.com";
         String password = "1234";
         String nickname = "test";
@@ -24,7 +23,7 @@ public class MemberTest {
         RoleType roleType = RoleType.MEMBER;
 
         //when
-        Member member = new Member(email, password, profileImg, nickname, introduction, providerType, roleType);
+        Member member = new Member(accountId, email, password, profileImg, nickname, introduction, providerType, roleType);
 
         //then
         assertThat(member.checkPassword("1234")).isEqualTo(true);

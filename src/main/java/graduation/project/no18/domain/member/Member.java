@@ -2,14 +2,13 @@ package graduation.project.no18.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import graduation.project.no18.domain.Base.BaseEntity;
-import graduation.project.no18.enums.ProviderType;
-import graduation.project.no18.enums.RoleType;
+import graduation.project.no18.global.oauth.enums.ProviderType;
+import graduation.project.no18.global.oauth.enums.RoleType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -26,17 +25,25 @@ public class Member extends BaseEntity {
     @JsonIgnore
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
+
+    @Column(name = "id", length = 15)
+    private String accountId;
     private String email;
+    @Column(length = 20)
     private String password;
     private String nickname;
+    @Column(columnDefinition = "TEXT")
     private String profileImg;
+
+    @Column(columnDefinition = "TEXT")
     private String introduction;
     private ProviderType providerType;
     private RoleType roleType;
 
     @Builder
-    public Member(String email, String password, String profileImg, String nickname,
+    public Member(String accountId, String email, String password, String profileImg, String nickname,
                   String introduction, ProviderType providerType, RoleType roleType){
+        this.accountId = accountId;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
