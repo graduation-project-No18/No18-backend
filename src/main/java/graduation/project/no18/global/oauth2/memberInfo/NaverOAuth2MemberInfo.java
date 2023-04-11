@@ -51,7 +51,7 @@ public class NaverOAuth2MemberInfo extends OAuth2MemberInfo {
             return null;
         }
 
-        return (String) response.get("imageUrl");
+        return (String) response.get("profile_image");
     }
 
 
