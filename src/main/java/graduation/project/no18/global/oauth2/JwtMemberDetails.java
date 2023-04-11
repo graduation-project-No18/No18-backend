@@ -48,6 +48,11 @@ public class JwtMemberDetails implements UserDetails, OAuth2User {
     }
 
     @Override
+    public <A> A getAttribute(String name) {
+        return OAuth2User.super.getAttribute(name);
+    }
+
+    @Override
     public String getPassword() {
         return null;
     }

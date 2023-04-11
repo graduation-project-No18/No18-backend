@@ -40,6 +40,7 @@ public class OAuth2AuthenticationSuccessHandler extends SavedRequestAwareAuthent
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         String targetUrl = determineTargetUrl(request, response, authentication);
+        System.out.println("targetUrl = " + targetUrl);
         if (response.isCommitted()) {
             logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
             return;

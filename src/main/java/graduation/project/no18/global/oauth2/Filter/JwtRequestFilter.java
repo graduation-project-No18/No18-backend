@@ -1,5 +1,6 @@
 package graduation.project.no18.global.oauth2.Filter;
 
+import graduation.project.no18.global.oauth2.JwtMemberDetails;
 import graduation.project.no18.global.oauth2.service.JwtMemberDetailsService;
 import graduation.project.no18.global.oauth2.utils.JwtTokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -21,14 +22,14 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-
     private final JwtMemberDetailsService jwtMemberDetailsService;
     private final JwtTokenUtil jwtTokenUtil;
 
-
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain chain)
+            throws ServletException, IOException {
         final String requestTokenHeader = request.getHeader("Authorization");
         String username = null;
         String jwtToken = null;
@@ -50,14 +51,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         // Once we get the token validate it.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            UserDetails userDetails = jwtMemberDetailsService.loadUserByUsername(username);
+            JwtMemberDetails memberDetails = (JwtMemberDetails) jwtMemberDetailsService.loadUserByUsername(username);
 
             // if token is valid configure Spring Security to manually set
             // authentication
-            if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
+            if (jwtTokenUtil.validateToken(jwtToken, memberDetails)) {
 
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                        new UsernamePasswordAuthenticationToken(
+                            memberDetails, null, memberDetails.getAuthorities()
+                        );
+
                 usernamePasswordAuthenticationToken
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

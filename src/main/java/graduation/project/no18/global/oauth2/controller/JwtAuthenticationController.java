@@ -45,10 +45,10 @@ public class JwtAuthenticationController {
 
 
     @GetMapping("/refresh")
-    public ApiResponse refreshToken(HttpServletRequest request, HttpServletResponse response){
+    public ApiResponse getRefreshToken(HttpServletRequest request, HttpServletResponse response){
         JwtMemberDetails principal = (JwtMemberDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String accessToken = request.getHeader("Authorization").substring(7);
-        if(!jwtTokenUtil.validateToken(accessToken,principal)){
+        if(!jwtTokenUtil.validateToken(accessToken, principal)){
             return ApiResponse.invalidAccessToken();
         }
 
@@ -58,7 +58,7 @@ public class JwtAuthenticationController {
             return ApiResponse.notExpiredTokenYet();
         }
 
-        String email = jwtTokenUtil.getClaimFromToken(accessToken,Claims::getSubject);
+        String accountId = jwtTokenUtil.getClaimFromToken(accessToken,Claims::getSubject);
         Role role = Role.MEMBER;
         Cookie[] cookies = request.getCookies();
         String refreshToken = CookieUtils.getCookie(request,REFRESH_TOKEN)
@@ -66,22 +66,24 @@ public class JwtAuthenticationController {
                 .orElse((null));
 
 
-        if(!jwtTokenUtil.validateToken(refreshToken,principal)){
+        if(!jwtTokenUtil.validateToken(refreshToken, principal)){
             return ApiResponse.invalidRefreshToken();
         }
 
-        MemberRefreshToken memberRefreshToken = memberRefreshTokenRepository.findByUserIdAndRefreshToken(email,refreshToken);
+        MemberRefreshToken memberRefreshToken =
+                memberRefreshTokenRepository.findByUserIdAndRefreshToken(accountId,refreshToken);
+
         if(memberRefreshToken==null){
             return ApiResponse.invalidRefreshToken();
         }
 
-        String newAccessToken= jwtTokenUtil.generateToken(email);
+        String newAccessToken= jwtTokenUtil.generateToken(accountId);
         long validTime = jwtTokenUtil.getExpirationDateFromToken(refreshToken).getTime()- now.getTime();
 
         if(validTime<THREE_DAYS_MSEC){
             long refreshTokenExpiry=appProperties.getAuth().getTokenExpiry();
 
-            refreshToken=jwtTokenUtil.generateToken(email);
+            refreshToken=jwtTokenUtil.generateToken(accountId);
 
             memberRefreshToken.setRefreshToken(refreshToken);
 
@@ -96,7 +98,9 @@ public class JwtAuthenticationController {
 
     private void authenticate(String username, String password) throws Exception {
         try {
-            Authentication authentication=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            Authentication authentication =
+                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
             System.out.println(authentication.getAuthorities().toString());
 
