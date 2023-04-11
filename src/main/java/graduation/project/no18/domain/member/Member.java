@@ -2,8 +2,8 @@ package graduation.project.no18.domain.member;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import graduation.project.no18.domain.Base.BaseEntity;
-import graduation.project.no18.global.oauth.type.ProviderType;
-import graduation.project.no18.global.oauth.type.RoleType;
+import graduation.project.no18.global.oauth2.enums.ProviderType;
+import graduation.project.no18.global.oauth2.enums.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,12 +37,13 @@ public class Member extends BaseEntity {
 
     @Column(columnDefinition = "TEXT")
     private String introduction;
+    @Column(columnDefinition = "VARCHAR")
     private ProviderType providerType;
-    private RoleType roleType;
+    private Role roleType;
 
     @Builder
     public Member(String accountId, String email, String password, String profileImg, String nickname,
-                  String introduction, ProviderType providerType, RoleType roleType){
+                  String introduction, ProviderType providerType, Role roleType){
         this.accountId = accountId;
         this.email = email;
         this.password = password;
@@ -65,7 +66,7 @@ public class Member extends BaseEntity {
     public ProviderType getProviderType(){
         return providerType;
     }
-    public RoleType getRoleType(){
+    public Role getRole(){
         return roleType;
     }
     public void changePassword(String password){
@@ -84,7 +85,7 @@ public class Member extends BaseEntity {
         this.providerType = providerType;
     }
 
-    private void setRoleType(RoleType roleType){
+    private void setRoleType(Role roleType){
         this.roleType = roleType;
     }
 

@@ -1,7 +1,7 @@
 package graduation.project.no18.domain.member;
 
-import graduation.project.no18.global.oauth.type.ProviderType;
-import graduation.project.no18.global.oauth.type.RoleType;
+import graduation.project.no18.global.oauth2.enums.ProviderType;
+import graduation.project.no18.global.oauth2.enums.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -20,7 +20,7 @@ public class MemberTest {
         String profileImg = null;
         String introduction = "test";
         ProviderType providerType = ProviderType.LOCAL;
-        RoleType roleType = RoleType.MEMBER;
+        Role roleType = Role.MEMBER;
 
         //when
         Member member = new Member(accountId, email, password, profileImg, nickname, introduction, providerType, roleType);
