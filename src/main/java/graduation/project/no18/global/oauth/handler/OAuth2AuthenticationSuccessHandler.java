@@ -81,6 +81,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         OidcUser user = ((OidcUser) authentication.getPrincipal());
         OAuth2MemberInfo memberInfo =
                 OAuth2MemberInfoFactory.getOAuth2MemberInfo(providerType, user.getAttributes());
+
         Collection<? extends GrantedAuthority> authorities =
                 ((OidcUser) authentication.getPrincipal()).getAuthorities();
 

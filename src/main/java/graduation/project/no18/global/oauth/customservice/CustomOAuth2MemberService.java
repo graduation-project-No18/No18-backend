@@ -41,13 +41,13 @@ public class CustomOAuth2MemberService extends DefaultOAuth2UserService {
                         .toUpperCase());
         OAuth2MemberInfo memberInfo =
                 OAuth2MemberInfoFactory.getOAuth2MemberInfo(providerType, member.getAttributes());
-        System.out.println(providerType);
+
         Member savedMember =
                 memberRepository.findMemberByAccountId(memberInfo.getId())
-                        .orElse(createMember(memberInfo, providerType));
+                        .orElseGet(() -> createMember(memberInfo, providerType));
 
         if(!savedMember.checkProviderType(providerType)){
-            throw new IllegalArgumentException("asd");
+            throw new IllegalArgumentException("소셜 로그인 계정을 잘못 고르지 않았나 확인해주세요!");
         }
         return MemberPrincipal.create(savedMember, member.getAttributes());
     }
@@ -62,7 +62,6 @@ public class CustomOAuth2MemberService extends DefaultOAuth2UserService {
                 .roleType(RoleType.MEMBER)
                 .build();
 
-        return memberRepository.save(member);
+        return memberRepository.saveAndFlush(member);
     }
-
 }

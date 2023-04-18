@@ -6,6 +6,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthReqDto {
-    private String id;
+    private String accountId;
     private String password;
 }
