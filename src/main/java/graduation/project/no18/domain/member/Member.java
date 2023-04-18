@@ -57,10 +57,13 @@ public class Member extends BaseEntity {
         return nickname;
     }
 
-    public String getPassword() {return password;}
     public String getAccountId(){return accountId;}
     public String getEmail(){
         return email;
+    }
+
+    public String getPassword(){
+        return null;
     }
     public ProviderType getProviderType(){
         return providerType;
@@ -71,7 +74,6 @@ public class Member extends BaseEntity {
     public void changePassword(String password){
         this.password = password;
     }
-
     public void changeIntroduction(String introduction){
         this.introduction = introduction;
     }
