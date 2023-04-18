@@ -11,21 +11,33 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MemberTest {
 
     @Test
-    public void createMemberTest(){
+    public void checkPasswordTest(){
         //given
-        String accountId = "test";
-        String email = "test@test.com";
         String password = "1234";
-        String nickname = "test";
-        String profileImg = null;
-        String introduction = "test";
-        ProviderType providerType = ProviderType.LOCAL;
-        RoleType roleType = RoleType.MEMBER;
+        Member member = Member.builder()
+                .password(password)
+                .build();
 
         //when
-        Member member = new Member(accountId, email, password, profileImg, nickname, introduction, providerType, roleType);
+        String s = "1234";
 
         //then
-        assertThat(member.checkPassword("1234")).isEqualTo(true);
+        assertThat(member.checkPassword(s)).isEqualTo(true);
+    }
+
+    @Test
+    public void checkProviderTypeTest(){
+        //given
+        Member member = Member.builder()
+                .providerType(ProviderType.LOCAL)
+                .build();
+
+        //when
+        ProviderType pt1 = ProviderType.NAVER;
+        ProviderType pt2 = ProviderType.LOCAL;
+
+        //then
+        assertThat(member.checkProviderType(pt1)).isEqualTo(false);
+        assertThat(member.checkProviderType(pt2)).isEqualTo(true);
     }
 }

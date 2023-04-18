@@ -4,6 +4,7 @@ import graduation.project.no18.domain.member.Member;
 import graduation.project.no18.global.oauth.type.ProviderType;
 import graduation.project.no18.global.oauth.type.RoleType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -87,6 +88,8 @@ public class MemberPrincipal implements OAuth2User, UserDetails, OidcUser {
     private void setAttributes(Map<String, Object> attributes){
         this.attributes = attributes;
     }
+
+
     public static MemberPrincipal create(Member member){
         return new MemberPrincipal(
                 member.getAccountId(),
