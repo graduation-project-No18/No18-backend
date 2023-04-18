@@ -5,8 +5,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 /src/main/resources/application.yml
-/src/main/resources/application-oauth.yml
-/src/main/resources/application-connection.yml
+/src/main/resources/application-oauth-prod.yml
+/src/main/resources/application-oauth-dev.yml
+/src/main/resources/application-connection-prod.yml
+/src/main/resources/application-connection-dev.yml
 /sr
 ### STS ###
 .apt_generated
