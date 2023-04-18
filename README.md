@@ -23,7 +23,7 @@ no18의 Backend Repository 입니다.
 <br>
 
 - ### Software Architecture : 
-![no18-architecture](https://no18.s3.ap-northeast-2.amazonaws.com/images/20230327_1.drawio.png)
+![no18-architecture](https://no18.s3.ap-northeast-2.amazonaws.com/images/20230418.png)
 <br><br><br>
 
 ### 작업 순서(backend)
@@ -40,6 +40,6 @@ no18의 Backend Repository 입니다.
 
 - 20230407 - OAuth2 관련 작업중.. 
 - 20230408 - 소셜로그인 적용 완료(카카오, 구글) - 네이버 소셜 로그인 지속적으로 오류 발생중.. 에러 확인 필요
-- 
+- 20230418 - 소셜로그인 해결 및 아키텍쳐 수정, ERD에서 계획한 대로 디렉토리 구조 수정
 
 
