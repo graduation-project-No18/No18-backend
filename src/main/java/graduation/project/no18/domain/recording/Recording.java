@@ -28,7 +28,7 @@ public class Recording {
     @OneToMany(mappedBy = "recording")
     private List<Recommendation> recommendationList = new ArrayList<>();
 
+    //private String octave;
 
-
-
+    //private String s3Link;
 }

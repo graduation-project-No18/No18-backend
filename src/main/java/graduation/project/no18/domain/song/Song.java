@@ -18,5 +18,13 @@ public class Song {
     @JoinColumn(name = "recommendation_id")
     private Recommendation recommendation;
 
+    private String title;
+    private String singer;
+
+
+    //private String octave; //노래의 최고음 옥타브
+
+    //private String youtubeLink; //노래 공식 유튜브 링크 (금영 유튜브일지도 모름)
+
 
 }
