@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface MemberRepository extends JpaRepository<Member, UUID>, MemberRepositoryCustom{
 
-    Optional<Member> findMemberByEmail(String email);
-
     Optional<Member> findMemberByAccountId(String id);
+
+
 }

@@ -25,18 +25,15 @@ public class Member extends BaseEntity {
     @JsonIgnore
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
-
     @Column(name = "id")
     private String accountId;
     private String email;
     @Column(length = 20)
     private String password;
-
     @Column(length = 8)
     private String nickname;
     @Column(columnDefinition = "TEXT")
     private String profileImg;
-
     @Column(columnDefinition = "TEXT")
     private String introduction;
     private ProviderType providerType;
@@ -56,6 +53,12 @@ public class Member extends BaseEntity {
         this.introduction = introduction;
         setProviderType(providerType);
         setRoleType(roleType);
+    }
+    private void setProviderType(ProviderType providerType){
+        this.providerType = providerType;
+    }
+    private void setRoleType(RoleType roleType){
+        this.roleType = roleType;
     }
 
     public String getAccountId(){return accountId;}
@@ -85,14 +88,6 @@ public class Member extends BaseEntity {
         this.nickname = nickname;
     }
 
-    private void setProviderType(ProviderType providerType){
-        this.providerType = providerType;
-    }
-
-    private void setRoleType(RoleType roleType){
-        this.roleType = roleType;
-    }
-
     public boolean checkPassword(String password){
        return this.password.equals(password);
     }
@@ -100,4 +95,5 @@ public class Member extends BaseEntity {
     public boolean checkProviderType(ProviderType providerType) {
         return this.providerType.equals(providerType);
     }
+
 }

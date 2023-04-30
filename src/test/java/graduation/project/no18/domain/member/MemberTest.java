@@ -40,4 +40,6 @@ public class MemberTest {
         assertThat(member.checkProviderType(pt1)).isEqualTo(false);
         assertThat(member.checkProviderType(pt2)).isEqualTo(true);
     }
+
+
 }

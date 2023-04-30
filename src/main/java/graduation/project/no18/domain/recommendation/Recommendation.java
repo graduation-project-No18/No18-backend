@@ -24,6 +24,8 @@ public class Recommendation {
     private Recording recording;
 
     @OneToMany(mappedBy = "recommendation")
-    private List<Song> songList = new ArrayList<>();
+    private List<Song> songList = new ArrayList<>(); // 추천하는 곡의 수는 3곡 정도로 제한(결정장애 방지)
+
+//    private String octave; //노래의 최고음 옥타브
 
 }

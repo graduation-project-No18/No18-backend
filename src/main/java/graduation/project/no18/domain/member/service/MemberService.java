@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    public Member getMember(String memberAccountId){
+    public Member getMember(String memberAccountId) {
         return memberRepository.findMemberByAccountId(memberAccountId).orElseGet(
                 () -> {
                     throw new IllegalArgumentException("Invalid id");
