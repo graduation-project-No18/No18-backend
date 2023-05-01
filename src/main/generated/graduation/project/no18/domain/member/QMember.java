@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -34,11 +35,15 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath nickname = createString("nickname");
 
+    public final StringPath octave = createString("octave");
+
     public final StringPath password = createString("password");
 
     public final StringPath profileImg = createString("profileImg");
 
     public final EnumPath<graduation.project.no18.global.oauth.type.ProviderType> providerType = createEnum("providerType", graduation.project.no18.global.oauth.type.ProviderType.class);
+
+    public final ListPath<graduation.project.no18.domain.recording.Recording, graduation.project.no18.domain.recording.QRecording> recordingList = this.<graduation.project.no18.domain.recording.Recording, graduation.project.no18.domain.recording.QRecording>createList("recordingList", graduation.project.no18.domain.recording.Recording.class, graduation.project.no18.domain.recording.QRecording.class, PathInits.DIRECT2);
 
     public final EnumPath<graduation.project.no18.global.oauth.type.RoleType> roleType = createEnum("roleType", graduation.project.no18.global.oauth.type.RoleType.class);
 

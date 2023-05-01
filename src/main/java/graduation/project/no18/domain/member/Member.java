@@ -3,6 +3,7 @@ package graduation.project.no18.domain.member;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import graduation.project.no18.domain.Base.BaseEntity;
 import graduation.project.no18.domain.recording.Recording;
+import graduation.project.no18.global.oauth.principal.MemberPrincipal;
 import graduation.project.no18.global.oauth.type.ProviderType;
 import graduation.project.no18.global.oauth.type.RoleType;
 import jakarta.persistence.*;
@@ -11,8 +12,10 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,6 +41,7 @@ public class Member extends BaseEntity {
     private String introduction;
     private ProviderType providerType;
     private RoleType roleType;
+    private String octave;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Recording> recordingList = new ArrayList<>();
@@ -61,21 +65,6 @@ public class Member extends BaseEntity {
         this.roleType = roleType;
     }
 
-    public String getAccountId(){return accountId;}
-    public String getEmail(){
-        return email;
-    }
-
-    public String getPassword(){
-        return password;
-    }
-    public ProviderType getProviderType(){
-        return providerType;
-    }
-    public RoleType getRoleType(){
-        return roleType;
-    }
-
     public void changePassword(String password){
         this.password = password;
     }
@@ -96,4 +85,26 @@ public class Member extends BaseEntity {
         return this.providerType.equals(providerType);
     }
 
+    private String getNickname(){
+        return this.nickname;
+    }
+
+    private String getIntroduction(){
+        return this.introduction;
+    }
+
+    private String getOctave(){
+        return this.octave;
+    }
+
+    public MemberPrincipal toMemberPrincipal(){
+        return new MemberPrincipal(
+                this.accountId,
+                this.email,
+                this.password,
+                this.providerType,
+                this.roleType,
+                Collections.singletonList(new SimpleGrantedAuthority(RoleType.MEMBER.getCode()))
+        );
+    }
 }
