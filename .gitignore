@@ -9,7 +9,7 @@ build/
 /src/main/resources/application-oauth-dev.yml
 /src/main/resources/application-connection-prod.yml
 /src/main/resources/application-connection-dev.yml
-/sr
+/src/main/generated/**
 ### STS ###
 .apt_generated
 .classpath

@@ -1,10 +1,11 @@
 package graduation.project.no18.domain.member;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 public class MemberDto {
 
     private String nickname;

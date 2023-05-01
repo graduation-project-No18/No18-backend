@@ -101,9 +101,18 @@ public class Member extends BaseEntity {
                 this.password,
                 this.providerType,
                 this.roleType,
-                Collections.singletonList(new SimpleGrantedAuthority(RoleType.MEMBER.getCode()))
+                Collections.singletonList(
+                        new SimpleGrantedAuthority(RoleType.MEMBER.getCode()))
         );
     }
 
+    public MemberDto toDto(){
+        return new MemberDto(
+                this.nickname,
+                this.profileImg,
+                this.introduction,
+                this.octave
+        );
+    }
 
 }
