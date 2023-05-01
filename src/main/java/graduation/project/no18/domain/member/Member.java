@@ -61,12 +61,9 @@ public class Member extends BaseEntity {
     private void setProviderType(ProviderType providerType){
         this.providerType = providerType;
     }
+
     private void setRoleType(RoleType roleType){
         this.roleType = roleType;
-    }
-
-    public void changePassword(String password){
-        this.password = password;
     }
 
     public void changeIntroduction(String introduction){
@@ -107,4 +104,6 @@ public class Member extends BaseEntity {
                 Collections.singletonList(new SimpleGrantedAuthority(RoleType.MEMBER.getCode()))
         );
     }
+
+
 }
